@@ -1,0 +1,116 @@
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.content {
+    flex: 0 0 1200px;
+    display: flex;
+    height: 100%;
+    flex-wrap: wrap;
+
+}
+
+video {
+    height: 100%;
+    width: 100%;
+}
+
+.video_name {
+    width: 100%;
+    text-align: center;
+    color: #409EFF;
+}
+
+.item {
+    flex: 0 0 600px;
+    width: 400px;
+    height: 500px;
+    border: 1px solid #409EFF;
+    box-sizing: border-box;
+}
+
+.input_group {
+    flex: 0 0 calc(100% - 900px);
+    height: 100%;
+    border: 1px solid #409EFF;
+    height: 100%;
+}
+
+.input_item {
+    width: 400px;
+    padding: 10px;
+    position: relative;
+}
+
+.input_item > input {
+    width: 250px;
+    height: 30px;
+}
+
+.input_item > button {
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 35px;
+}
+
+.input_item > span {
+}
+
+.input_item > button:hover {
+    cursor: pointer;
+}
+
+.input_item > button:active {
+    transform: scale(0.95);
+}
+
+video::-webkit-media-controls-play-button {
+    display: none;
+}
+
+video::-webkit-media-controls-timeline {
+    display: none;
+}
+
+video::-webkit-media-controls-current-time-display {
+    display: none;
+}
+
+video::-webkit-media-controls-time-remaining-display {
+    display: none;
+}
+
+video::-webkit-media-controls-mute-button {
+    display: none;
+}
+
+video::-webkit-media-controls-toggle-closed-captions-button {
+    display: none;
+}
+
+video::-webkit-media-controls-volume-slider {
+    display: none;
+}
+
+video::focus {
+    border: none !important;
+    outline: none !important;
+}

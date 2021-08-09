@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="/static/js/flv.min.js"></script>
+    <link rel="stylesheet" href="/static/css/flv.css">
+</head>
+
+<body>
+<div class="main">
+    <div class="content">
+        <div class="item">
+            <video id="my-player1" class="video-component vjs-default-skin video-calss" preload controls
+                   disablePictureInPicture muted>
+                您的浏览器不支持 video 标签
+            </video>
+            <div class="video_name">窗口1</div>
+        </div>
+        <div class="item">
+            <video id="my-player2" class="video-component vjs-default-skin video-calss" preload controls
+                   disablePictureInPicture muted>
+                您的浏览器不支持 video 标签
+            </video>
+            <div class="video_name">窗口2</div>
+        </div>
+        <div class="item">
+            <video id="my-player3" class="video-component vjs-default-skin video-calss" preload controls
+                   disablePictureInPicture muted>
+                您的浏览器不支持 video 标签
+            </video>
+            <div class="video_name">窗口3</div>
+        </div>
+        <div class="item">
+            <video id="my-player4" class="video-component vjs-default-skin video-calss" preload controls
+                   disablePictureInPicture muted>
+                您的浏览器不支持 video 标签
+            </video>
+            <div class="video_name">窗口4</div>
+        </div>
+        <div class="item">
+            <video id="my-player5" class="video-component vjs-default-skin video-calss" preload controls
+                   disablePictureInPicture muted>
+                您的浏览器不支持 video 标签
+            </video>
+            <div class="video_name">窗口5</div>
+        </div>
+        <div class="item">
+            <video id="my-player6" class="video-component vjs-default-skin video-calss" preload controls
+                   disablePictureInPicture muted>
+                您的浏览器不支持 video 标签
+            </video>
+            <div class="video_name">窗口6</div>
+        </div>
+        <div class="item">
+            <video id="my-player7" class="video-component vjs-default-skin video-calss" preload controls
+                   disablePictureInPicture muted>
+                您的浏览器不支持 video 标签
+            </video>
+            <div class="video_name">窗口7</div>
+        </div>
+        <div class="item">
+            <video id="my-player8" class="video-component vjs-default-skin video-calss" preload controls
+                   disablePictureInPicture muted>
+                您的浏览器不支持 video 标签
+            </video>
+            <div class="video_name">窗口8</div>
+        </div>
+        <div class="item">
+            <video id="my-player9" class="video-component vjs-default-skin video-calss" preload controls
+                   disablePictureInPicture muted>
+                您的浏览器不支持 video 标签
+            </video>
+            <div class="video_name">窗口9</div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+    let flvArr = []
+    console.log('vidoe')
+
+    function btnClick(num) {
+        let input = document.getElementsByTagName('input')[num]
+        console.log(num + 1, input.value);
+        let videoElement = document.getElementById(`my-player${num + 1}`);
+        let flvPlayer = flvjs.createPlayer({
+            type: 'flv',
+            isLive: true,
+            url: input.value,
+            hasVideo: true
+        }, {
+            enableWorker: false, //不启用分离线程
+            enableStashBuffer: false, //关闭IO隐藏缓冲区
+            isLive: true,
+            lazyLoad: false,
+            lazyLoadMaxDuration: 0,
+            autoCleanupSourceBuffer: true,
+            autoCleanupMaxBackwardDuration: 10,
+            autoCleanupMinBackwardDuration: 10
+        });
+        flvArr[num] = flvPlayer
+        flvPlayer.attachMediaElement(videoElement);
+        flvPlayer.load();
+        flvPlayer.play();
+    }
+
+    setInterval(() => {
+        if (flvArr.length != 0) {
+            flvArr.map((item, index) => {
+                console.log(item.buffered.end(0), item.currentTime)
+
+                let end = item.buffered.end(0);//获取当前buffered值
+                let diff = end - item.currentTime;//获取buffered与currentTime的差值
+                if (diff > 2) {
+                    item.currentTime = end - 0.5;//手动跳帧
+                }
+            })
+        }
+
+    }, 6000);
+</script>
+
+</html>

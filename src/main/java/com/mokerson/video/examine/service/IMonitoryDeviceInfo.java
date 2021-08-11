@@ -13,5 +13,7 @@ public interface IMonitoryDeviceInfo {
 
 	List<IotMonitoryVo> monitoryPointSearch(StatisticsConfig config);
 
+	List<IotMonitoryVo> getFlvVideoPlay(StatisticsConfig config);
+
 	//List<MonitoryPtzInfo> ptzQueryInfo(StatisticsConfig config);
 }

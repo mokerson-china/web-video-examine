@@ -5,43 +5,59 @@
     <title>可切换的精美CSS3登录注册表单DEMO演示</title>
     <link rel="stylesheet" href="/static/css/normalize.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/common.js"></script>
+    <script type="text/javascript">
+        var dataJson = {};
+        function setRequestMonitoryInfo() {
+            dataJson.monitoryApiHost = $("#monitoryApiHost").val();
+            dataJson.monitoryApiPort = $("#monitoryApiPort").val();
+            dataJson.mainId = $("#mainId").val();
+            if (isEmpty(dataJson.monitoryApiHost)) {
+                alert("IP为空");
+                return;
+            }
+            if (isEmpty(dataJson.monitoryApiPort)) {
+                alert("端口为空");
+                return;
+            }
+            alert("配置成功");
+            $("#main-div").removeClass("right-panel-active");
+        }
+        function getFlvMonitoryPlay() {
+            dataJson.monitoryApiAccount = $("#monitoryApiAccount").val();
+            dataJson.monitoryApiPassword = $("#monitoryApiPassword").val();
+            form_submit = $('#form2');
+            form_submit.prop('monitoryApiHost', dataJson.monitoryApiHost);
+            form_submit.prop('monitoryApiPort', dataJson.monitoryApiPort);
+            form_submit.prop('mainId', dataJson.mainId);
+            form_submit.submit();
 
+/*            $.post("/VideoController/getMonitoryPage" ,dataJson,function (data){
+                window.location = data;
+                /!*var newWin = window.open('', '_blank');
+                newWin.document.write(data);*!/
+            },"json");*/
+        }
+    </script>
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<div class="container right-panel-active">
+<div class="container" id="main-div">
     <!-- 配置 -->
-    <div class="container__form container--signup">
-        <form action="#" class="form" id="form1">
-            <h2 class="form__title">配置</h2>
-            <input type="text" placeholder="10.10.10.10" class="input" id="ip"/>
-            <input type="text" placeholder="9000" class="input" id="port"/>
-            <input type="text" placeholder="44060401441383040001" class="input" id="MainId"/>
-            <button class="btn">配置</button>
-        </form>
-    </div>
-
-    <!-- 登录 -->
-    <div class="container__form container--signin">
-        <form action="#" class="form" id="form2">
+    <div class="container__form">
+        <form action="/VideoController/getMonitoryPage" class="form" id="form2" method="post">
             <h2 class="form__title">登录</h2>
-            <input type="email" placeholder="Email" class="input"/>
-            <input type="password" placeholder="Password" class="input"/>
-            <a href="#" class="link">Forgot your password?</a>
-            <button class="btn">登录</button>
-        </form>
-    </div>
+            <input type="text" placeholder="账号" class="input" id="monitoryApiAccount" name="monitoryApiAccount"/>
+            <input type="password" placeholder="密码" class="input" id="monitoryApiPassword" name="monitoryApiPassword"/>
 
-    <!-- Overlay -->
-    <div class="container__overlay">
-        <div class="overlay">
-            <div class="overlay__panel overlay--left">
-                <button class="btn" id="signIn">登录</button>
-            </div>
-            <div class="overlay__panel overlay--right">
-                <button class="btn" id="signUp">配置</button>
-            </div>
-        </div>
+            <h2 class="form__title">配置</h2>
+            <input type="text" placeholder="视频模块后端访问IP地址" class="input" id="monitoryApiHost" name="monitoryApiHost"/>
+            <input type="text" placeholder="访问端口" class="input" id="monitoryApiPort" name="monitoryApiPort"/>
+            <input type="text" placeholder="摄像头主ID" class="input" id="mainId" name="mainId"/>
+
+            <button class="btn" onclick="getFlvMonitoryPlay()">登录</button>
+        </form>
     </div>
 </div>
 <!-- partial -->
